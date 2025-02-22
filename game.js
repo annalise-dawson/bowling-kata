@@ -13,13 +13,13 @@ const simpleFrames = [
 ]
 
 function scoreSimpleGame(frames) {
-  let total = 0
+  let totalScore = 0
 
   frames.forEach((frame) => {
-    total += frame[0] + frame[1]
+    totalScore += frame[0] + frame[1]
   })
 
-  return total
+  return totalScore
 }
 
 console.log(scoreSimpleGame(simpleFrames))
@@ -39,18 +39,18 @@ const spareFrames = [
 ]
 
 function scoreSpareGame(frames) {
-  let total = 0
+  let totalScore = 0
   for (let i = 0; i < frames.length; i++) {
     let currentFrame = frames[i]
     let firstFrameAfter = frames[i + 1]
 
     if (currentFrame[0] + currentFrame[1] == 10) {
-      total += 10 + firstFrameAfter[0]
+      totalScore += 10 + firstFrameAfter[0]
     } else {
-      total += currentFrame[0] + currentFrame[1]
+      totalScore += currentFrame[0] + currentFrame[1]
     }
   }
-  return total
+  return totalScore
 }
 
 console.log(scoreSpareGame(spareFrames))
