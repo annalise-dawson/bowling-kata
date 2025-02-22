@@ -40,6 +40,7 @@ const spareFrames = [
 
 function scoreSpareGame(frames) {
   let totalScore = 0
+
   for (let i = 0; i < frames.length; i++) {
     let currentFrame = frames[i]
     let firstFrameAfter = frames[i + 1]
@@ -71,6 +72,7 @@ const spareStrikeFrames = [
 
 function scoreSpareStrikeGame(frames) {
   let totalScore = 0
+
   for (let i = 0; i < frames.length; i++) {
     let currentFrame = frames[i]
     let firstFrameAfter = frames[i + 1]
@@ -105,6 +107,7 @@ const spareStrikeDblStrikeFrames = [
 
 function scoreDoubleStrikeGame(frames) {
   let totalScore = 0
+
   for (let i = 0; i < frames.length; i++) {
     let currentFrame = frames[i]
     let firstFrameAfter = frames[i + 1]
@@ -126,11 +129,42 @@ function scoreDoubleStrikeGame(frames) {
 console.log(scoreDoubleStrikeGame(spareStrikeDblStrikeFrames))
 
 // Score 141 (includes a strike on the last frame):
-// const strikeLastframes = [
-//   [1, 2], [6, 4], [5, 4], [10, 0], [7, 2], [10, 0], [10, 0], [5, 2], [7, 0], [10, 10, 10]
-// ]
-//
+const strikeLastframes = [
+  [1, 2],
+  [6, 4],
+  [5, 4],
+  [10, 0],
+  [7, 2],
+  [10, 0],
+  [10, 0],
+  [5, 2],
+  [7, 0],
+  [10, 10, 10],
+]
+
+function scoreLastFrameStrike(frames) {
+  let totalScore = 0
+
+  for (let i = 0; i < frames.length; i++) {
+    let currentFrame = frames[i]
+    let firstFrameAfter = frames[i + 1]
+    let secondFrameAfter = frames[i + 2]
+
+    if (i == 9 && currentFrame[0] == 10) {
+      totalScore += currentFrame[0] + currentFrame[1] + currentFrame[2]
+    } else if (currentFrame[0] == 10 && firstFrameAfter[0] == 10) {
+      totalScore += 20 + secondFrameAfter[0]
+    } else if (currentFrame[0] == 10) {
+      totalScore += 10 + firstFrameAfter[0] + firstFrameAfter[1]
+    } else if (currentFrame[0] + currentFrame[1] == 10) {
+      totalScore += 10 + firstFrameAfter[0]
+    } else {
+      totalScore += currentFrame[0] + currentFrame[1]
+    }
+  }
+  return totalScore
+}
+
+console.log(scoreLastFrameStrike(strikeLastframes))
+
 // Score 300 (perfect game):
-// const perfectframes = [
-//   [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]
-// ]
