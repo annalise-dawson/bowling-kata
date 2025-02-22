@@ -168,3 +168,42 @@ function scoreLastFrameStrike(frames) {
 console.log(scoreLastFrameStrike(strikeLastframes))
 
 // Score 300 (perfect game):
+const perfectFrames = [
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 0],
+  [10, 10, 10],
+]
+
+function scorePerfectGame(frames) {
+  let totalScore = 0
+
+  for (let i = 0; i < frames.length; i++) {
+    let currentFrame = frames[i]
+    let firstFrameAfter = frames[i + 1]
+    let secondFrameAfter = frames[i + 2]
+
+    if (i == 9 && currentFrame[0] == 10) {
+      totalScore += currentFrame[0] + currentFrame[1] + currentFrame[2]
+    } else if (i == 8 && currentFrame[0] && firstFrameAfter[0] == 10) {
+      totalScore += 20 + firstFrameAfter[2]
+    } else if (currentFrame[0] == 10 && firstFrameAfter[0] == 10) {
+      totalScore += 20 + secondFrameAfter[0] //can't read this
+    } else if (currentFrame[0] == 10) {
+      totalScore += 10 + firstFrameAfter[0] + firstFrameAfter[1]
+    } else if (currentFrame[0] + currentFrame[1] == 10) {
+      totalScore += 10 + firstFrameAfter[0]
+    } else {
+      totalScore += currentFrame[0] + currentFrame[1]
+    }
+  }
+  return totalScore
+}
+
+console.log(scorePerfectGame(perfectFrames))
