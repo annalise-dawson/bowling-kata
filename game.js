@@ -38,11 +38,11 @@ const spareFrames = [
   [7, 2],
 ]
 
-function scoreSpareGame(spareFrames) {
+function scoreSpareGame(frames) {
   let total = 0
-  for (let i = 0; i < spareFrames.length; i++) {
-    let currentFrame = spareFrames[i]
-    let firstFrameAfter = spareFrames[i + 1]
+  for (let i = 0; i < frames.length; i++) {
+    let currentFrame = frames[i]
+    let firstFrameAfter = frames[i + 1]
 
     if (currentFrame[0] + currentFrame[1] == 10) {
       total += 10 + firstFrameAfter[0]
@@ -56,9 +56,38 @@ function scoreSpareGame(spareFrames) {
 console.log(scoreSpareGame(spareFrames))
 
 // Score 104 (with spares and strikes):
-// const spareStrikeFrames = [
-//   [6, 4], [8, 0], [10, 0], [2, 7], [5, 5], [4, 0], [10, 0], [2, 1], [2, 6], [4, 4]
-// ]
+const spareStrikeFrames = [
+  [6, 4],
+  [8, 0],
+  [10, 0],
+  [2, 7],
+  [5, 5],
+  [4, 0],
+  [10, 0],
+  [2, 1],
+  [2, 6],
+  [4, 4],
+]
+
+function scoreSpareStrikeGame(frames) {
+  let totalScore = 0
+  for (let i = 0; i < frames.length; i++) {
+    let currentFrame = frames[i]
+    let firstFrameAfter = frames[i + 1]
+
+    if (currentFrame[0] == 10) {
+      totalScore += 10 + firstFrameAfter[0] + firstFrameAfter[1]
+    } else if (currentFrame[0] + currentFrame[1] == 10) {
+      totalScore += 10 + firstFrameAfter[0]
+    } else {
+      totalScore += currentFrame[0] + currentFrame[1]
+    }
+  }
+  return totalScore
+}
+
+console.log(scoreSpareStrikeGame(spareStrikeFrames))
+
 //
 // Score 119 (with spares, strikes and a double strike):
 // const spareStrikeDblStrikeSFrames = [
