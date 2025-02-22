@@ -25,9 +25,35 @@ function scoreSimpleGame(frames) {
 console.log(scoreSimpleGame(simpleFrames))
 
 // Score 71 (with spares):
-// const spareFrames = [
-//   [6, 1], [4, 0], [6, 4], [2, 7], [3, 5], [5, 0], [5, 5], [0, 0], [1, 6], [7, 2]
-// ]
+const spareFrames = [
+  [6, 1],
+  [4, 0],
+  [6, 4],
+  [2, 7],
+  [3, 5],
+  [5, 0],
+  [5, 5],
+  [0, 0],
+  [1, 6],
+  [7, 2],
+]
+
+function scoreSpareGame(spareFrames) {
+  let total = 0
+  for (let i = 0; i < spareFrames.length; i++) {
+    let currentFrame = spareFrames[i]
+    let firstFrameAfter = spareFrames[i + 1]
+
+    if (currentFrame[0] + currentFrame[1] == 10) {
+      total += 10 + firstFrameAfter[0]
+    } else {
+      total += currentFrame[0] + currentFrame[1]
+    }
+  }
+  return total
+}
+
+console.log(scoreSpareGame(spareFrames))
 
 // Score 104 (with spares and strikes):
 // const spareStrikeFrames = [
