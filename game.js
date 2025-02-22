@@ -90,10 +90,41 @@ console.log(scoreSpareStrikeGame(spareStrikeFrames))
 
 //
 // Score 119 (with spares, strikes and a double strike):
-// const spareStrikeDblStrikeSFrames = [
-//   [1, 2], [6, 4], [5, 4], [10, 0], [7, 2], [10, 0], [10, 0], [5, 2], [7, 0], [4, 4]
-// ]
-//
+const spareStrikeDblStrikeFrames = [
+  [1, 2],
+  [6, 4],
+  [5, 4],
+  [10, 0],
+  [7, 2],
+  [10, 0],
+  [10, 0],
+  [5, 2],
+  [7, 0],
+  [4, 4],
+]
+
+function scoreDoubleStrikeGame(frames) {
+  let totalScore = 0
+  for (let i = 0; i < frames.length; i++) {
+    let currentFrame = frames[i]
+    let firstFrameAfter = frames[i + 1]
+    let secondFrameAfter = frames[i + 2]
+
+    if (currentFrame[0] == 10 && firstFrameAfter[0] == 10) {
+      totalScore += 20 + secondFrameAfter[0]
+    } else if (currentFrame[0] == 10) {
+      totalScore += 10 + firstFrameAfter[0] + firstFrameAfter[1]
+    } else if (currentFrame[0] + currentFrame[1] == 10) {
+      totalScore += 10 + firstFrameAfter[0]
+    } else {
+      totalScore += currentFrame[0] + currentFrame[1]
+    }
+  }
+  return totalScore
+}
+
+console.log(scoreDoubleStrikeGame(spareStrikeDblStrikeFrames))
+
 // Score 141 (includes a strike on the last frame):
 // const strikeLastframes = [
 //   [1, 2], [6, 4], [5, 4], [10, 0], [7, 2], [10, 0], [10, 0], [5, 2], [7, 0], [10, 10, 10]
